@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#b51f32">
+<title>死刑：正義、法律與生命的交界</title>
+<style>
+:root {
+  --paper: #f8f4ee;
+  --ink: #1b1918;
+  --red: #b51f32;
+  --line: #ded2c7;
+  --card: #fffdf9;
+  --muted: #6d625d;
+  --soft: #f0e3df;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.75 "Noto Sans TC", "Microsoft JhengHei",
+        system-ui, sans-serif;
+}
+a { color: var(--red); text-underline-offset: 3px; }
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+:focus-visible {
+  outline: 3px solid #2463eb;
+  outline-offset: 3px;
+}
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+.skip:focus {
+  left: 10px;
+  z-index: 99;
+  background: white;
+  padding: 8px;
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #f8f4eef0;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+nav {
+  max-width: 1150px;
+  margin: auto;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.logo { font-weight: 900; }
+.logo b { color: var(--red); }
+nav .links { display: flex; gap: 4px; flex-wrap: wrap; }
+nav a {
+  padding: 4px 8px;
+  border-radius: 20px;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: .88rem;
+}
+nav a:hover { background: var(--soft); }
+
+.hero {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: -5%;
+  top: 8%;
+  width: min(52vw, 620px);
+  height: min(52vw, 620px);
+  border-radius: 45% 55% 62% 38%;
+  background: radial-gradient(
+    ellipse at 40% 35%,
+    #b51f3233, #b51f320a 58%, transparent 70%
+  );
+  transform: rotate(-17deg);
+}
+.hero-inner, main, .foot {
+  max-width: 1150px;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.hero-inner {
+  padding-top: 70px;
+  padding-bottom: 70px;
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+.eyebrow, .kicker {
+  color: var(--red);
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+}
+h1 {
+  font-size: clamp(2.6rem, 7vw, 5.5rem);
+  line-height: 1.12;
+  letter-spacing: -.04em;
+  max-width: 850px;
+  margin: 16px 0;
+}
+h1 em { font-style: normal; color: var(--red); }
+.hero p {
+  max-width: 690px;
+  color: #514944;
+  font-size: 1.08rem;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 25px 0;
+}
+.btn {
+  display: inline-block;
+  border: 1px solid var(--ink);
+  border-radius: 4px;
+  background: var(--ink);
+  color: white;
+  padding: 10px 16px;
+  text-decoration: none;
+}
+.btn.red { background: var(--red); border-color: var(--red); }
+.btn.ghost { background: transparent; color: var(--ink); }
+.btn:hover { filter: brightness(1.1); }
+
+main { padding-bottom: 50px; }
+.section {
+  padding: 68px 0;
+  border-bottom: 1px solid var(--line);
+  scroll-margin-top: 90px;
+}
+.heading {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+.num {
+  font: 2.5rem Georgia, serif;
+  color: var(--red);
+  line-height: 1.2;
+}
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  line-height: 1.2;
+  margin: 5px 0 10px;
+  letter-spacing: -.025em;
+}
+h3 { line-height: 1.35; margin: 4px 0 9px; }
+.lede, .muted { color: var(--muted); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 15px;
+}
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  padding: 20px;
+  box-shadow: 0 8px 24px #2017120a;
+  border-radius: 3px;
+  min-width: 0;
+}
+.s3 { grid-column: span 3; }
+.s4 { grid-column: span 4; }
+.s6 { grid-column: span 6; }
+.s8 { grid-column: span 8; }
+.s12 { grid-column: span 12; }
+
+.zone {
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+.zone::after {
+  content: attr(data-no);
+  position: absolute;
+  right: 8px;
+  bottom: -42px;
+  font: 8rem Georgia, serif;
+  color: #b51f3212;
+  pointer-events: none;
+}
+.zone a { font-weight: 800; text-decoration: none; }
+.pill {
+  display: inline-block;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  padding: 1px 9px;
+  font-size: .76rem;
+  color: var(--muted);
+  margin-right: 5px;
+}
+.notice {
+  border-left: 4px solid var(--red);
+  background: #f0e7df;
+  padding: 13px 16px;
+}
+.timeline {
+  margin: 25px 0 0 8px;
+  padding-left: 22px;
+  border-left: 2px solid #c6ad9e;
+}
+.event { position: relative; padding: 0 0 25px 8px; }
+.event::before {
+  content: "";
+  position: absolute;
+  left: -30px;
+  top: 8px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--red);
+  border: 3px solid var(--paper);
+}
+.event time { font-weight: 900; color: var(--red); }
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 18px 0;
+}
+.filters input, .filters select {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 10px;
+  min-width: 190px;
+  border-radius: 3px;
+}
+.cases {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.case { display: flex; flex-direction: column; gap: 8px; }
+.status { color: var(--red); font-size: .78rem; font-weight: 800; }
+.case details { border-top: 1px solid var(--line); padding-top: 9px; }
+summary { cursor: pointer; font-weight: 700; }
+.hidden { display: none !important; }
+
+.chart { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.big {
+  font-size: 3rem;
+  line-height: 1.2;
+  color: var(--red);
+  font-weight: 900;
+}
+.barrow {
+  display: grid;
+  grid-template-columns: 100px 1fr 55px;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0;
+  font-size: .9rem;
+}
+.bar { height: 12px; background: #e6dcd3; }
+.bar span { display: block; height: 100%; background: var(--red); }
+
+.debate { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.debate .card:first-child { border-top: 4px solid #315c55; }
+.debate .card:last-child { border-top: 4px solid var(--red); }
+
+.question { padding: 15px 0; border-bottom: 1px solid var(--line); }
+.question > label:first-child { font-weight: 700; display: block; margin-bottom: 6px; }
+.question textarea {
+  width: 100%;
+  min-height: 90px;
+  border: 1px solid var(--line);
+  padding: 10px;
+  background: white;
+  resize: vertical;
+}
+.output {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  background: #f0e7df;
+  border: 1px dashed #c6ad9e;
+  padding: 14px;
+  margin-top: 15px;
+}
+.sources { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.source {
+  border: 1px solid var(--line);
+  padding: 13px;
+  background: var(--card);
+  overflow-wrap: anywhere;
+}
+.source small { display: block; color: var(--muted); }
+footer { background: var(--ink); color: var(--paper); padding: 35px 0; }
+footer p { color: #d9cec6; max-width: 700px; font-size: .9rem; }
+.foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+
+@media (max-width: 800px) {
+  .s3, .s4, .s6, .s8 { grid-column: span 6; }
+  .cases { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .chart { grid-template-columns: 1fr; }
+  nav { align-items: flex-start; flex-direction: column; }
+}
+@media (max-width: 540px) {
+  .section { padding: 45px 0; }
+  .heading { grid-template-columns: 42px 1fr; }
+  .num { font-size: 1.8rem; }
+  .s3, .s4, .s6, .s8, .s12 { grid-column: span 12; }
+  .cases, .debate, .sources { grid-template-columns: 1fr; }
+  .hero { min-height: 65vh; }
+  .barrow { grid-template-columns: 80px 1fr 45px; font-size: .82rem; }
+}
+@media print {
+  header, .no-print, footer { display: none !important; }
+  body { background: white; }
+  .section { padding: 22px 0; break-inside: avoid; }
+  .card { box-shadow: none; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳至主要內容</a>
+
+<header>
+  <nav aria-label="主要導覽">
+    <div class="logo"><b>●</b> 死刑制度互動展覽</div>
+    <div class="links">
+      <a href="#map">展區</a>
+      <a href="#history">歷史</a>
+      <a href="#law">法律</a>
+      <a href="#cases">案例</a>
+      <a href="#world">國際比較</a>
+      <a href="#debate">觀點</a>
+      <a href="#reflect">反思</a>
+      <a href="#sources">資料庫</a>
+    </div>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">INTERACTIVE EXHIBITION · TAIWAN</div>
+    <h1>死刑：<br><em>正義、法律與生命</em>的交界</h1>
+    <p>
+      一項刑罰，牽涉國家權力、司法程序、被害者與家屬、
+      受刑人權利，以及社會對正義的不同想像。
+      沿著資料、案例與問題前進，不必先選邊站。
+    </p>
+    <div class="actions">
+      <a class="btn red" href="#map">進入展覽 ↗</a>
+      <a class="btn ghost" href="#law">從法律開始</a>
+    </div>
+    <p class="muted">
+      展覽原則：區分可核實事實、法院判決、當事人主張與價值判斷。
+      未完成查核的細節不以推測補齊。
+    </p>
+  </div>
+</section>
+
+<main id="main">
+
+<section class="section" id="map">
+  <div class="heading">
+    <div class="num">00</div>
+    <div>
+      <div class="kicker">EXHIBITION MAP</div>
+      <h2>選擇你的閱讀路徑</h2>
+      <p class="lede">可依序參觀，也可直接進入感興趣的展區。</p>
+    </div>
+  </div>
+  <div class="grid">
+    <article class="card zone s4" data-no="01">
+      <div><span class="pill">歷史</span><h3>制度如何走到今天？</h3>
+      <p>從可確認的司法與制度節點理解變化。</p></div>
+      <a href="#history">進入歷史展區 →</a>
+    </article>
+    <article class="card zone s4" data-no="02">
+      <div><span class="pill">法律</span><h3>憲法與執行程序</h3>
+      <p>閱讀憲法法庭判決與執行死刑規則。</p></div>
+      <a href="#law">進入法律展區 →</a>
+    </article>
+    <article class="card zone s4" data-no="03">
+      <div><span class="pill">案例</span><h3>個案與司法判斷</h3>
+      <p>區分判決結果、程序節點與待補證之處。</p></div>
+      <a href="#cases">進入案例展區 →</a>
+    </article>
+    <article class="card zone s4" data-no="04">
+      <div><span class="pill">數據</span><h3>如何讀懂統計？</h3>
+      <p>看見數字，也看見統計口徑與限制。</p></div>
+      <a href="#world">進入數據展區 →</a>
+    </article>
+    <article class="card zone s4" data-no="05">
+      <div><span class="pill">觀點</span><h3>不同立場如何論證？</h3>
+      <p>比較主張背後的價值、證據與疑問。</p></div>
+      <a href="#debate">進入觀點展區 →</a>
+    </article>
+    <article class="card zone s4" data-no="06">
+      <div><span class="pill">反思</span><h3>把問題帶回自己</h3>
+      <p>留下暫時的想法，並可複製或列印。</p></div>
+      <a href="#reflect">進入反思展區 →</a>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="history">
+  <div class="heading">
+    <div class="num">01</div>
+    <div>
+      <div class="kicker">HISTORY & CONTEXT</div>
+      <h2>歷史不是一條直線</h2>
+      <p class="lede">
+        本版先放入能由官方來源直接支持的制度節點。
+        完整歷史年表仍需逐項核對法規沿革、官方統計與裁判資料。
+      </p>
+    </div>
+  </div>
+  <div class="notice">
+    <strong>閱讀提示：</strong>
+    以下是已核實節點，不是完整歷史。
+    未完成查證的年代、政策變化與執行數量不在此推測補齊。
+  </div>
+  <div class="timeline">
+    <article class="event">
+      <time>1997 年 8 月 13 日</time>
+      <h3>江國慶案：死刑執行的司法紀錄節點</h3>
+      <p>
+        官方司法新聞資料記載江國慶於該日遭執行死刑，
+        後續軍事法院判決無罪確定。個案細節應以官方裁判與相關資料全文為準。
+      </p>
+      <a href="https://jirs.judicial.gov.tw/GNNWS/NNWSS002.asp?id=418070"
+         target="_blank" rel="noopener">官方司法新聞資料 ↗</a>
+    </article>
+    <article class="event">
+      <time>2012 年 8 月 31 日</time>
+      <h3>蘇建和等三人案：無罪判決</h3>
+      <p>
+        司法院公報資料記載，臺灣高等法院於相關更審程序
+        判決蘇建和等三人無罪，並依相關規定確定。
+      </p>
+      <a href="https://www.judicial.gov.tw/tw/communique/dl-221588-c06183879920469a9ed91ec9a82c7b64.html"
+         target="_blank" rel="noopener">閱讀司法院公報 ↗</a>
+    </article>
+    <article class="event">
+      <time>2017 年 11 月 21 日</time>
+      <h3>鄭性澤案：無罪判決確定</h3>
+      <p>
+        司法院公報資料記載，臺灣高等法院臺中分院更審判決
+        撤銷原判決並諭知無罪，檢察官未上訴，判決於該日確定。
+      </p>
+      <a href="https://www.judicial.gov.tw/tw/communique/dl-588-d011101128114deb95a8ed0f8399de94.html"
+         target="_blank" rel="noopener">閱讀司法院公報 ↗</a>
+    </article>
+    <article class="event">
+      <time>2024 年 9 月 20 日</time>
+      <h3>憲法法庭 113 年憲判字第 8 號</h3>
+      <p>
+        憲法法庭作成死刑案判決，針對特定犯罪條文與死刑適用條件
+        作成憲法判斷，並要求死刑案件符合判決所述的正當法律程序保障。
+      </p>
+      <a href="https://cons.judicial.gov.tw/docdata.aspx?fid=38&id=351689"
+         target="_blank" rel="noopener">閱讀判決全文 ↗</a>
+    </article>
+    <article class="event">
+      <time>2025 年 4 月 18 日</time>
+      <h3>《執行死刑規則》修正條文施行</h3>
+      <p>
+        全國法規資料庫記載，本次修正日期為 2025 年 4 月 16 日，
+        修正條文自 4 月 18 日施行。
+      </p>
+      <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=I0040012"
+         target="_blank" rel="noopener">閱讀法規全文 ↗</a>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="law">
+  <div class="heading">
+    <div class="num">02</div>
+    <div>
+      <div class="kicker">CONSTITUTION & PROCEDURE</div>
+      <h2>法律如何設下界線？</h2>
+      <p class="lede">
+        判決不是一句「合憲」或「違憲」就能概括；
+        需要看審查的法條、適用條件與程序要求。
+      </p>
+    </div>
+  </div>
+  <div class="grid">
+    <article class="card s8">
+      <span class="pill">核心判決</span>
+      <h3>憲法法庭 113 年憲判字第 8 號（死刑案）</h3>
+      <p>判決日期：2024 年 9 月 20 日。</p>
+      <p>
+        判決涉及刑法中數類以死刑為最重本刑的規定，
+        以及死刑案件的刑事程序保障。
+      </p>
+      <div class="notice">
+        <strong>避免誤讀：</strong>
+        不能簡化成「死刑全面合憲」，也不能說成「死刑已被廢除」。
+        應回到判決主文與理由逐項理解。
+      </div>
+      <p>
+        <a href="https://www.judicial.gov.tw/tw/cp-1887-1167432-36127-1.html"
+           target="_blank" rel="noopener">司法院判決摘要 ↗</a>
+       　
+        <a href="https://cons.judicial.gov.tw/docdata.aspx?fid=38&id=351689"
+           target="_blank" rel="noopener">判決全文 ↗</a>
+      </p>
+    </article>
+    <article class="card s4">
+      <span class="pill">法規</span>
+      <h3>《執行死刑規則》</h3>
+      <p>
+        全國法規資料庫顯示修正日期為 2025 年 4 月 16 日，
+        修正條文自同年 4 月 18 日施行。
+      </p>
+      <p>
+        第 2 條列出法務部審核死刑案件時應注意的程序事項。
+        詳細內容請以現行條文為準。
+      </p>
+      <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=I0040012"
+         target="_blank" rel="noopener">查閱現行條文 ↗</a>
+    </article>
+    <article class="card s4">
+      <h3>審查對象是什麼？</h3>
+      <p class="muted">哪些法條或程序受到審查？不要把單一爭點擴張成全部制度。</p>
+    </article>
+    <article class="card s4">
+      <h3>法院設下哪些條件？</h3>
+      <p class="muted">找出主文中的限制與理由中的程序保障。</p>
+    </article>
+    <article class="card s4">
+      <h3>判決沒有回答什麼？</h3>
+      <p class="muted">法律判斷不一定能直接回答所有倫理、政策或實證問題。</p>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="cases">
+  <div class="heading">
+    <div class="num">03</div>
+    <div>
+      <div class="kicker">CASE FILES</div>
+      <h2>個案：結果、程序與記憶</h2>
+      <p class="lede">
+        案例卡只展示能由官方資料支持的基本司法節點。
+        個案不能取代整體制度研究，也不應成為情緒化論證工具。
+      </p>
+    </div>
+  </div>
+
+  <div class="filters no-print">
+    <input id="caseSearch" type="search" placeholder="搜尋案例名稱…" aria-label="搜尋案例名稱">
+    <select id="caseStatus" aria-label="依資料狀態篩選">
+      <option value="all">全部資料狀態</option>
+      <option value="verified">有官方資料摘要</option>
+      <option value="pending">仍待補官方資料</option>
+    </select>
+  </div>
+
+  <div class="cases" id="caseGrid">
+    <article class="card case" data-name="江國慶案" data-status="verified">
+      <div class="status">● 已核實基本司法節點</div>
+      <h3>江國慶案</h3>
+      <p>
+        官方司法新聞資料記載：1997 年 8 月 13 日執行死刑；
+        後續軍事法院於 2011 年 9 月 10 日判決無罪確定。
+      </p>
+      <details>
+        <summary>資料界線與延伸閱讀</summary>
+        <p>此卡不延伸描述證據爭議或個別人員責任；完整案情需逐段核對官方裁判、調查報告與相關資料。</p>
+        <a href="https://jirs.judicial.gov.tw/GNNWS/NNWSS002.asp?id=418070"
+           target="_blank" rel="noopener">官方司法新聞資料 ↗</a>
+      </details>
+    </article>
+
+    <article class="card case" data-name="蘇建和案" data-status="verified">
+      <div class="status">● 已核實基本司法節點</div>
+      <h3>蘇建和案</h3>
+      <p>
+        司法院公報資料記載：臺灣高等法院於 2012 年 8 月 31 日
+        相關更審程序判決蘇建和等三人無罪，並依相關規定確定。
+      </p>
+      <details>
+        <summary>資料界線與延伸閱讀</summary>
+        <p>刑事判決與後續民事求償屬不同程序；不可將不同程序認定混為一談。</p>
+        <a href="https://www.judicial.gov.tw/tw/communique/dl-221588-c06183879920469a9ed91ec9a82c7b64.html"
+           target="_blank" rel="noopener">司法院公報 ↗</a>
+      </details>
+    </article>
+
+    <article class="card case" data-name="鄭性澤案" data-status="verified">
+      <div class="status">● 已核實基本司法節點</div>
+      <h3>鄭性澤案</h3>
+      <p>
+        司法院公報資料記載：臺灣高等法院臺中分院更審判決
+        撤銷原判決並諭知無罪，檢察官未上訴，於 2017 年 11 月 21 日確定。
+      </p>
+      <details>
+        <summary>資料界線與延伸閱讀</summary>
+        <p>此處只呈現判決程序節點，不在未核對完整裁判前補寫證據細節。</p>
+        <a href="https://www.judicial.gov.tw/tw/communique/dl-588-d011101128114deb95a8ed0f8399de94.html"
+           target="_blank" rel="noopener">司法院公報 ↗</a>
+      </details>
+    </article>
+
+    <article class="card case" data-name="徐自強案" data-status="pending">
+      <div class="status">○ 待補官方資料</div>
+      <h3>徐自強案</h3>
+      <p>本版尚未納入實質案情敘述。</p>
+      <details>
+        <summary>為什麼先保留？</summary>
+        <p>需先取得並核對足以支持判決歷程、日期與法律結果的官方裁判或司法機關資料，再加入內容。</p>
+      </details>
+    </article>
+
+    <article class="card case" data-name="曾文欽殺人案" data-status="pending">
+      <div class="status">○ 需進一步核對判決全文</div>
+      <h3>曾文欽殺人案</h3>
+      <p>
+        已找到法院司法新聞資料，但本版尚未以完整判決內容核對案情細節，
+        因此不補寫實質敘述。
+      </p>
+      <details>
+        <summary>資料界線</summary>
+        <p>需核對法院、案號、判決結果及全文，避免混淆相似姓名案件。</p>
+        <a href="https://jirs.judicial.gov.tw/GNNWS/NNWSS002.asp?id=172287"
+           target="_blank" rel="noopener">法院司法新聞資料 ↗</a>
+      </details>
+    </article>
+
+    <article class="card case" data-name="王景玉案 小燈泡事件" data-status="pending">
+      <div class="status">○ 待補官方資料</div>
+      <h3>王景玉案（小燈泡事件）</h3>
+      <p>
+        本版尚未納入實質案情敘述，避免在缺少已核對官方資料時
+        簡化被害者、家屬與司法程序的經驗。
+      </p>
+      <details>
+        <summary>後續補件需求</summary>
+        <p>需核對相關官方裁判與司法機關資料，並以尊重被害者及家屬的方式編寫。</p>
+      </details>
+    </article>
+  </div>
+  <p id="caseCount" class="muted" aria-live="polite"></p>
+</section>
+
+<section class="section" id="world">
+  <div class="heading">
+    <div class="num">04</div>
+    <div>
+      <div class="kicker">DATA & INTERNATIONAL COMPARISON</div>
+      <h2>數字的意義，取決於怎麼計算</h2>
+      <p class="lede">
+        國際比較需要同時呈現來源、統計年度、分類定義與無法完整掌握的部分。
+      </p>
+    </div>
+  </div>
+
+  <div class="grid">
+    <article class="card s4">
+      <div class="kicker">AMNESTY INTERNATIONAL</div>
+      <div class="big">1,518</div>
+      <h3>2024 年有紀錄的死刑執行數</h3>
+      <p>
+        國際特赦組織紀錄的 2024 年全球執行數；
+        比 2023 年的 1,153 件增加約 32%。
+      </p>
+      <p class="muted">
+        不是全球實際總數的完整統計；
+        中國及部分國家的執行情況無法獨立確認或不公開。
+      </p>
+      <a href="https://www.amnesty.org/zh-hant/documents/act50/8976/2025/-en/"
+         target="_blank" rel="noopener">報告與方法說明 ↗</a>
+    </article>
+
+    <article class="card s8">
+      <h3>全球已紀錄執行數（相對比例）</h3>
+      <div class="barrow">
+        <span>2023 年</span>
+        <div class="bar"><span style="width:76%"></span></div>
+        <strong>1,153</strong>
+      </div>
+      <div class="barrow">
+        <span>2024 年</span>
+        <div class="bar"><span style="width:100%"></span></div>
+        <strong>1,518</strong>
+      </div>
+      <p class="muted">
+        以 2024 年為 100% 的相對比例呈現。
+        這是「執行數」，不是「死刑判決數」或「死刑定讞人數」。
+      </p>
+      <div class="notice">
+        部分國家資訊不透明，因此全球紀錄數可能低於實際數字。
+        跨國比較時應一起閱讀報告的方法說明。
+      </div>
+    </article>
+
+    <article class="card s6">
+      <h3>國際分類的常見類別</h3>
+      <ol>
+        <li>廢除所有罪行死刑</li>
+        <li>僅對普通罪行廢除死刑</li>
+        <li>實務上廢除死刑</li>
+        <li>保留死刑</li>
+      </ol>
+      <p class="muted">
+        分類須依來源採用的定義與統計日期判讀；
+        法律廢除與長期未執行不是同一件事。
+      </p>
+      <a href="https://www.amnesty.org/en/documents/act50/9240/2025/en/"
+         target="_blank" rel="noopener">國際特赦組織分類文件 ↗</a>
+    </article>
+
+    <article class="card s6">
+      <h3>比較時應追問</h3>
+      <ul>
+        <li>比較的是法律條文、判決、執行數，還是民意？</li>
+        <li>資料年份是否一致？</li>
+        <li>是否有國家不公開或無法查證的數據？</li>
+        <li>各國司法制度與犯罪定義是否可直接相比？</li>
+      </ul>
+    </article>
+  </div>
+</section>
+
+<section class="section" id="debate">
+  <div class="heading">
+    <div class="num">05</div>
+    <div>
+      <div class="kicker">ARGUMENTS IN TENSION</div>
+      <h2>不是口號，而是論證</h2>
+      <p class="lede">
+        以下整理公共討論中常見的論證方向，不代表本展覽替任何一方背書。
+        具體實證主張應另附研究來源。
+      </p>
+    </div>
+  </div>
+
+  <div class="debate">
+    <article class="card">
+      <span class="pill">支持保留死刑的常見論證</span>
+      <h3>如何回應嚴重犯罪與正義需求？</h3>
+      <ul>
+        <li>應報與比例：刑罰是否應反映犯罪嚴重程度？</li>
+        <li>被害者及家屬：制度如何承認傷害並提供支持？</li>
+        <li>公共安全：最嚴重犯罪應採取何種制裁？</li>
+        <li>社會信任：司法如何回應公平期待？</li>
+      </ul>
+      <p class="muted">
+        延伸追問：這些目的是否必須透過死刑達成？如何衡量效果？
+      </p>
+    </article>
+
+    <article class="card">
+      <span class="pill">反對或主張廢除死刑的常見論證</span>
+      <h3>國家是否應保有不可逆的刑罰？</h3>
+      <ul>
+        <li>錯判風險：若判決錯誤，如何補救不可逆結果？</li>
+        <li>國家權力：死刑適用應受到哪些限制？</li>
+        <li>人權與尊嚴：刑罰權的界線如何界定？</li>
+        <li>替代措施：無期徒刑、被害者支持與預防政策如何設計？</li>
+      </ul>
+      <p class="muted">
+        延伸追問：替代制度如何兼顧公共安全、問責與被害者需求？
+      </p>
+    </article>
+  </div>
+
+  <div class="card" style="margin-top:15px">
+    <h3>檢視一個論點的四個問題</h3>
+    <div class="grid">
+      <div class="s3"><strong>主張</strong><p class="muted">它到底主張什麼？</p></div>
+      <div class="s3"><strong>證據</strong><p class="muted">法律、統計、研究或經驗？</p></div>
+      <div class="s3"><strong>假設</strong><p class="muted">依賴哪些未明說的前提？</p></div>
+      <div class="s3"><strong>限制</strong><p class="muted">什麼證據可能改變結論？</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="reflect">
+  <div class="heading">
+    <div class="num">06</div>
+    <div>
+      <div class="kicker">PERSONAL REFLECTION</div>
+      <h2>把問題帶回自己</h2>
+      <p class="lede">
+        這不是立場測驗，也不會替你判定答案對錯。
+        回答只留在目前開啟的頁面，不會上傳伺服器。
+      </p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="question">
+      <label>1. 你認為刑罰最重要的目的有哪些？</label>
+      <label><input type="checkbox" name="purpose" value="應報與比例"> 應報與比例</label>
+      <label><input type="checkbox" name="purpose" value="預防犯罪"> 預防犯罪</label>
+      <label><input type="checkbox" name="purpose" value="隔離危險"> 隔離危險</label>
+      <label><input type="checkbox" name="purpose" value="復歸與修復"> 復歸與修復</label>
+      <label><input type="checkbox" name="purpose" value="承認被害者傷害"> 承認被害者傷害</label>
+    </div>
+
+    <div class="question">
+      <label for="r2">2. 哪種證據最可能讓你重新思考原本看法？</label>
+      <textarea id="r2" placeholder="例如判決全文、錯判研究、犯罪預防研究或多元經驗……"></textarea>
+    </div>
+
+    <div class="question">
+      <label for="r3">3. 你覺得制度最難回答的問題是什麼？</label>
+      <textarea id="r3" placeholder="寫下你目前還沒有答案的問題。"></textarea>
+    </div>
+
+    <div class="question">
+      <label for="r4">4. 參觀前後，你的想法有什麼變化？</label>
+      <textarea id="r4" placeholder="可以寫立場改變，也可以寫得更確定或更猶豫。"></textarea>
+    </div>
+
+    <div class="actions no-print">
+      <button class="btn red" id="make">整理我的反思</button>
+      <button class="btn ghost" id="copy">複製文字</button>
+      <button class="btn ghost" id="print">列印／另存 PDF</button>
+      <button class="btn ghost" id="clear">清除回答</button>
+    </div>
+
+    <div id="output" class="output" hidden aria-live="polite"></div>
+    <p class="muted">
+      回答只存在本頁欄位；重新整理或關閉頁面後不保證保留。
+      複製與列印由你主動操作。
+    </p>
+  </div>
+</section>
+
+<section class="section" id="sources">
+  <div class="heading">
+    <div class="num">07</div>
+    <div>
+      <div class="kicker">SOURCE ARCHIVE</div>
+      <h2>來源資料庫</h2>
+      <p class="lede">
+        優先採用憲法法庭、司法院、法院司法新聞、全國法規資料庫
+        及具方法說明的研究機構。網站改版可能導致連結變動。
+      </p>
+    </div>
+  </div>
+
+  <div class="filters no-print">
+    <input id="sourceSearch" type="search" placeholder="搜尋來源、機關或關鍵字…" aria-label="搜尋來源資料">
+  </div>
+
+  <div class="sources" id="sourceList">
+    <article class="source" data-terms="憲法法庭 113年憲判字第8號 死刑 判決">
+      <strong>憲法法庭：113 年憲判字第 8 號判決</strong>
+      <small>官方判決全文｜2024-09-20</small>
+      <a href="https://cons.judicial.gov.tw/docdata.aspx?fid=38&id=351689" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="司法院 判決摘要 憲法法庭 死刑">
+      <strong>司法院：113 年憲判字第 8 號判決摘要</strong>
+      <small>官方摘要；摘要不構成判決本身</small>
+      <a href="https://www.judicial.gov.tw/tw/cp-1887-1167432-36127-1.html" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="全國法規資料庫 執行死刑規則 法務部 2025">
+      <strong>全國法規資料庫：《執行死刑規則》</strong>
+      <small>現行法規與沿革</small>
+      <a href="https://law.moj.gov.tw/LawClass/LawAll.aspx?pcode=I0040012" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="江國慶案 國家賠償 司法新聞">
+      <strong>司法院司法新聞：江國慶案相關資料</strong>
+      <small>官方司法新聞資料</small>
+      <a href="https://jirs.judicial.gov.tw/GNNWS/NNWSS002.asp?id=418070" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="蘇建和案 無罪 司法院公報">
+      <strong>司法院公報：蘇建和等三人案相關資料</strong>
+      <small>官方公報資料</small>
+      <a href="https://www.judicial.gov.tw/tw/communique/dl-221588-c06183879920469a9ed91ec9a82c7b64.html" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="鄭性澤案 無罪 司法院公報">
+      <strong>司法院公報：鄭性澤案相關資料</strong>
+      <small>官方公報資料</small>
+      <a href="https://www.judicial.gov.tw/tw/communique/dl-588-d011101128114deb95a8ed0f8399de94.html" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="曾文欽案 司法新聞">
+      <strong>法院司法新聞：曾文欽案資料入口</strong>
+      <small>後續仍須核對完整判決內容</small>
+      <a href="https://jirs.judicial.gov.tw/GNNWS/NNWSS002.asp?id=172287" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="國際特赦組織 2024 死刑執行 1518">
+      <strong>國際特赦組織：《Death Sentences and Executions in 2024》</strong>
+      <small>全球紀錄與方法限制｜2025</small>
+      <a href="https://www.amnesty.org/zh-hant/documents/act50/8976/2025/-en/" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+
+    <article class="source" data-terms="國際特赦組織 死刑分類 abolitionist retentionist">
+      <strong>國際特赦組織：死刑國家分類文件</strong>
+      <small>分類定義與比較口徑</small>
+      <a href="https://www.amnesty.org/en/documents/act50/9240/2025/en/" target="_blank" rel="noopener">開啟來源 ↗</a>
+    </article>
+  </div>
+  <p id="sourceCount" class="muted" aria-live="polite"></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="foot">
+    <div>
+      <div class="logo"><b>●</b> 死刑：正義、法律與生命的交界</div>
+      <p>
+        本網站供教育與公共議題探索使用，不構成法律意見。
+        內容以可查核資料為原則，會隨官方來源更新而修訂。
+      </p>
+    </div>
+    <div>
+      <a href="#main" style="color:white">回到頁首 ↑</a>
+      <p>初版｜已核實內容優先<br>單一 HTML · 無後端 · 不上傳反思回答</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+
+  // 案例搜尋與資料狀態篩選
+  const caseCards = [...document.querySelectorAll(".case")];
+
+  function filterCases() {
+    const query = $("caseSearch").value.trim().toLowerCase();
+    const status = $("caseStatus").value;
+    let count = 0;
+
+    caseCards.forEach(card => {
+      const matchesName = card.dataset.name.toLowerCase().includes(query);
+      const matchesStatus =
+        status === "all" || card.dataset.status === status;
+      const visible = matchesName && matchesStatus;
+
+      card.classList.toggle("hidden", !visible);
+      if (visible) count++;
+    });
+
+    $("caseCount").textContent =
+      `目前顯示 ${count} / ${caseCards.length} 個案例。資料狀態依本版已核對來源標示。`;
+  }
+
+  $("caseSearch").addEventListener("input", filterCases);
+  $("caseStatus").addEventListener("change", filterCases);
+  filterCases();
+
+  // 來源資料庫搜尋
+  const sourceCards = [...document.querySelectorAll(".source")];
+
+  function filterSources() {
+    const query = $("sourceSearch").value.trim().toLowerCase();
+    let count = 0;
+
+    sourceCards.forEach(card => {
+      const searchable = (card.innerText + " " + card.dataset.terms)
+        .toLowerCase();
+      const visible = searchable.includes(query);
+
+      card.classList.toggle("hidden", !visible);
+      if (visible) count++;
+    });
+
+    $("sourceCount").textContent =
+      `目前顯示 ${count} / ${sourceCards.length} 筆來源。`;
+  }
+
+  $("sourceSearch").addEventListener("input", filterSources);
+  filterSources();
+
+  // 產生個人反思摘要
+  function buildReflection() {
+    const purposes = [
+      ...document.querySelectorAll('input[name="purpose"]:checked')
+    ].map(item => item.value);
+
+    const lines = [
+      "《死刑：正義、法律與生命的交界》— 個人反思",
+      "整理時間：" + new Date().toLocaleString("zh-TW"),
+      "",
+      "1. 我認為刑罰的重要目的：",
+      purposes.length ? purposes.join("、") : "（未填寫）",
+      "",
+      "2. 哪種證據可能讓我重新思考：",
+      $("r2").value.trim() || "（未填寫）",
+      "",
+      "3. 我認為制度最難回答的問題：",
+      $("r3").value.trim() || "（未填寫）",
+      "",
+      "4. 參觀前後想法的變化：",
+      $("r4").value.trim() || "（未填寫）",
+      "",
+      "註：這是個人當下的思考紀錄，不是立場測驗或法律意見。"
+    ];
+
+    $("output").textContent = lines.join("\n");
+    $("output").hidden = false;
+    return $("output").textContent;
+  }
+
+  $("make").addEventListener("click", buildReflection);
+
+  // 複製反思文字；若瀏覽器不允許剪貼簿存取，顯示手動複製提示
+  $("copy").addEventListener("click", async () => {
+    const textToCopy = $("output").hidden
+      ? buildReflection()
+      : $("output").textContent;
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      alert("已複製反思文字。");
+    } catch (error) {
+      $("output").hidden = false;
+      alert("瀏覽器未允許自動複製，請手動選取下方文字複製。");
+    }
+  });
+
+  $("print").addEventListener("click", () => window.print());
+
+  $("clear").addEventListener("click", () => {
+    if (!confirm("確定清除目前頁面的反思回答？")) return;
+
+    document.querySelectorAll('input[name="purpose"]')
+      .forEach(item => item.checked = false);
+
+    ["r2", "r3", "r4"].forEach(id => $(id).value = "");
+    $("output").textContent = "";
+    $("output").hidden = true;
+  });
+})();
+</script>
+</body>
+</html>
